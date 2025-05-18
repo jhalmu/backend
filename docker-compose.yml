@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: ibkr
+    environment:
+      USE_MOCK: "true"  # Mock-tila päällä
+      IBKR_ACCOUNT_ID: "U7299935"  # Tämä ei vaikuta mock-tilassa
+    ports:
+      - "5055:5055"
+      - "5056:5056"
+    volumes:
+      - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-k", "-f", "https://localhost:5055/v1/api/one/user/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - ibkr-network
+
+networks:
+  ibkr-network:
+    driver: bridge

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Portfolio Overview</h2>
+
+<h3 class="text-lg font-semibold mb-4">Current Positions</h3>
+<table class="w-full">
+    <thead>
+        <tr class="border-b">
+            <th class="text-left py-2">Instrument</th>
+            <th class="text-right py-2">Quantity</th>
+            <th class="text-right py-2">Avg Cost</th>
+            <th class="text-right py-2">Current Price</th>
+            <th class="text-right py-2">Current Value</th>
+            <th class="text-right py-2">P/L</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in positions %}
+        <tr class="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
+            <td class="py-2">
+                <strong>
+                    <a href="/contract/{{ item['conid'] }}/365d" class="text-primary-600 dark:text-primary-400 hover:underline">
+                        {{ item['name'] }}
+                    </a>
+                </strong>
+                <br />
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ item['contractDesc'] }}</span>
+            </td>
+            <td class="text-right py-2">{{ item['position'] }}</td>
+            <td class="text-right py-2">${{ item['avgCost'] }}</td>
+            <td class="text-right py-2">${{ item['mktPrice']|round(2) }}</td>
+            <td class="text-right py-2">${{ item['mktValue'] }}</td>
+            <td class="text-right py-2">
+                <span class="{% if item['unrealizedPnl'] >= 0 %}text-green-600 dark:text-green-400{% else %}text-red-600 dark:text-red-400{% endif %}">
+                    ${{ item['unrealizedPnl']|round(2) }}
+                </span>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="text-center py-4 text-gray-500 dark:text-gray-400">No positions found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

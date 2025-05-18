@@ -1,0 +1,6 @@
+fastapi[standard]
+sqlmodel
+jinja2
+requests
+urllib3
+uvicorn

@@ -253,28 +253,25 @@ async def stock_details(request: Request, symbol: str):
 # Health check endpoint
 @app.get("/health")
 async def health_check():
+    """Health check endpoint that verifies the application and database status."""
     try:
-        # Tarkista DuckDB yhteys
+        # Testaa DuckDB-yhteys
         conn = get_db()
         conn.execute("SELECT 1")
         conn.close()
 
-        return JSONResponse(
-            status_code=200,
-            content={
-                "status": "healthy",
-                "timestamp": datetime.utcnow().isoformat(),
-                "version": "1.0.0",
-                "environment": os.getenv("ENVIRONMENT", "development"),
-            },
-        )
+        return {
+            "status": "healthy",
+            "timestamp": datetime.now().isoformat(),
+            "version": "1.0.0",
+            "environment": os.getenv("ENVIRONMENT", "development"),
+            "database": "connected",
+        }
     except Exception as e:
-        return JSONResponse(
-            status_code=503,
-            content={
-                "status": "unhealthy",
-                "error": str(e),
-                "timestamp": datetime.utcnow().isoformat(),
-                "environment": os.getenv("ENVIRONMENT", "development"),
-            },
-        )
+        return {
+            "status": "unhealthy",
+            "timestamp": datetime.now().isoformat(),
+            "version": "1.0.0",
+            "environment": os.getenv("ENVIRONMENT", "development"),
+            "error": str(e),
+        }

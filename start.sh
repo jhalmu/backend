@@ -14,7 +14,7 @@ else
 fi
 
 # Odota että gateway on ylhäällä (tarkistetaan portti 5056)
-for i in {1..12}; do
+for i in {1..6}; do
     if curl -s -f --connect-timeout 2 http://localhost:5056/v1/api/one/user/status > /dev/null 2>&1; then
         echo "Gateway is up!"
         break

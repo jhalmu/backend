@@ -22,7 +22,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Runtime stage
 FROM python:3.12-slim
 
-WORKDIR /app
+# Create non-root user
+#RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+WORKDIR /app 
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -31,14 +34,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy IBKR Gateway
-RUN mkdir -p gateway && cd gateway && \
+# Create all necessary directories
+RUN mkdir -p /app/gateway/logs \
+    /app/gateway/root/cache \
+    /app/static \
+    /app/templates
+
+
+# Copy IBKR Gateway and set up directories
+RUN cd /app/gateway && \
     curl -O https://download2.interactivebrokers.com/portal/clientportal.gw.zip && \
-    unzip clientportal.gw.zip && rm clientportal.gw.zip && \
-    mkdir -p logs && \
-    mkdir -p root/cache && \
-    chmod -R 777 logs && \
-    chmod -R 777 root/cache
+    unzip clientportal.gw.zip && rm clientportal.gw.zip
 
 # Copy application files
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
@@ -47,15 +53,31 @@ COPY conf.yaml gateway/conf.yaml
 COPY static/ static/
 COPY templates/ templates/
 
+# Set correct permissions and ownerships
+RUN chown -R root:root /app && \
+    # Set base permissions
+    chmod -R 777 /app && \
+    # Make start script executable
+    chmod +x /app/start.sh && \
+    # Set read-only permissions for Python and YAML files
+    find /app -type f -name "*.py" -exec chmod 644 {} \; && \
+    find /app -type f -name "*.yaml" -exec chmod 644 {} \; && \
+    # Set write permissions for logs and cache directories
+    chmod -R 777 /app/gateway/logs && \
+    chmod -R 777 /app/gateway/root/cache
+
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV ENVIRONMENT=development
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+# Health check with more specific settings
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:5055/health || exit 1
 
 EXPOSE 5055 5056
+
+# Switch to non-root user
+USER appuser
 
 CMD ["./start.sh"]

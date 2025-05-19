@@ -19,8 +19,8 @@ for i in {1..12}; do
         echo "Gateway is up!"
         break
     fi
-    echo "Waiting for gateway... ($i/12)"
-    sleep 5
+    echo "Waiting for gateway... ($i/6)"
+    sleep 2
 done
 
 # Käynnistä FastAPI-sovellus

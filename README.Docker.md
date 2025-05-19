@@ -1,6 +1,6 @@
 # Docker Setup for IBKR Portfolio
 
-This document describes how to run the IBKR Portfolio application using Docker.
+Tärkeää: Älä koskaan jaa .env-tiedostoa tai IBKR_ACCOUNT_ID:tä julkisesti. Kaikki salaisuudet ja tunnukset tulee säilyttää .env-tiedostossa, joka on .gitignore:ssa. Kehitysympäristössä käytetään mock-dataa (USE_MOCK=true), tuotannossa oikeaa IBKR-yhteyttä (USE_MOCK=false). Varmista, että ENVIRONMENT on production tuotantokäytössä. Suojaa palvelin palomuurilla ja käytä HTTPS:ää tuotannossa. Katso myös SECURITY.md (tulossa) ja .github/workflows/security.yml.
 
 ## Prerequisites
 
@@ -21,6 +21,7 @@ cp .env.example .env
 # - ENVIRONMENT: development/production
 # - DUCKDB_PATH: Path to DuckDB database file
 # - DUCKDB_CACHE_SIZE: Cache size for DuckDB
+# - USE_MOCK: true/false
 ```
 
 2. Create data directory:
@@ -55,6 +56,7 @@ The application uses the following environment variables (configured in `.env`):
 | ENVIRONMENT | development/production | development |
 | DUCKDB_PATH | Path to DuckDB database | data/portfolio.duckdb |
 | DUCKDB_CACHE_SIZE | DuckDB cache size | 1GB |
+| USE_MOCK | Use mock data (true/false) | true |
 
 ## Ports
 
@@ -90,7 +92,7 @@ The application includes a health check endpoint at `/health` that monitors:
 When you're ready, start your application by running:
 `docker compose up --build`.
 
-Your application will be available at http://localhost:8000.
+Your application will be available at http://localhost:5055.
 
 ### Deploying your application to the cloud
 

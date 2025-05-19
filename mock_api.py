@@ -4,9 +4,9 @@ Mock data for IBKR API responses during development.
 
 MOCK_ACCOUNTS = [
     {
-        "id": "U7299935",
-        "accountId": "U7299935",
-        "accountVan": "U7299935",
+        "id": "MOCK_ACCOUNT_ID",
+        "accountId": "MOCK_ACCOUNT_ID",
+        "accountVan": "MOCK_ACCOUNT_ID",
         "accountTitle": "Individual",
         "displayName": "Individual",
         "accountAlias": "Individual",
@@ -15,10 +15,10 @@ MOCK_ACCOUNTS = [
         "type": "INDIVIDUAL",
         "faclient": False,
         "parent": "",
-        "desc": "Individual",
+        "desc": "",
         "covestor": False,
         "masterAccountId": "",
-        "tradingType": "PAPER",
+        "tradingType": "CASH",
         "firmType": "INDIVIDUAL",
         "clearingStatus": "PAPER",
         "businessType": "INDIVIDUAL",

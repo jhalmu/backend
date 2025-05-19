@@ -1,17 +1,15 @@
+version: '3.8'
+
 services:
   app:
     build: .
     volumes:
-      - .:/app
       - ./data:/app/data
     ports:
       - "5055:5055"
-      - "5056:5056"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - DUCKDB_PATH=/app/data/portfolio.db
-      - DUCKDB_CACHE_SIZE=1GB
-      - ENVIRONMENT=development
+    env_file:
+      - .env
+    user: "${UID:-1000}:${GID:-1000}"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5055/health"]
       interval: 30s
@@ -19,4 +17,3 @@ services:
       retries: 3
       start_period: 40s
     restart: unless-stopped
-    user: "${UID:-1000}:${GID:-1000}"

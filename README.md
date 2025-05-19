@@ -10,12 +10,21 @@ Web-sovellus Interactive Brokers (IBKR) portfolion hallintaan ja analysointiin.
 - Real-time market data (when connected to IBKR)
 - Mock data support for development
 
+## Security & Environment
+
+- Älä koskaan jaa .env-tiedostoa tai IBKR_ACCOUNT_ID:tä julkisesti.
+- Kaikki salaisuudet ja tunnukset tulee säilyttää .env-tiedostossa, joka on .gitignore:ssa.
+- Kehitysympäristössä käytetään mock-dataa (USE_MOCK=true), tuotannossa oikeaa IBKR-yhteyttä (USE_MOCK=false).
+- Varmista, että ENVIRONMENT on production tuotantokäytössä.
+- Suojaa palvelin palomuurilla ja käytä HTTPS:ää tuotannossa.
+- Katso myös SECURITY.md (tulossa) ja .github/workflows/security.yml.
+
 ## Development Setup
 
 ### Prerequisites
 
 - Docker and Docker Compose
-- Python 3.11+
+- Python 3.12+
 - IBKR Account (for production use)
 
 ### Quick Start
@@ -37,6 +46,7 @@ cp .env.example .env
 # - ENVIRONMENT: development/production
 # - DUCKDB_PATH: Path to DuckDB database file
 # - DUCKDB_CACHE_SIZE: Cache size for DuckDB
+# - USE_MOCK: true/false
 ```
 
 3. Start the development environment:
@@ -58,6 +68,7 @@ The application uses the following environment variables (configured in `.env`):
 | ENVIRONMENT | development/production | development |
 | DUCKDB_PATH | Path to DuckDB database | data/portfolio.duckdb |
 | DUCKDB_CACHE_SIZE | DuckDB cache size | 1GB |
+| USE_MOCK | Use mock data (true/false) | true |
 
 ## Project Structure
 
@@ -76,7 +87,7 @@ The application uses the following environment variables (configured in `.env`):
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+Lue myös: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 

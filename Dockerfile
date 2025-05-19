@@ -5,7 +5,7 @@
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
 # Build stage
-FROM python:3.11-slim as builder
+FROM python:3.12-slim as builder
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Runtime stage
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
@@ -34,11 +34,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy IBKR Gateway
 RUN mkdir -p gateway && cd gateway && \
     curl -O https://download2.interactivebrokers.com/portal/clientportal.gw.zip && \
-    unzip clientportal.gw.zip && rm clientportal.gw.zip
+    unzip clientportal.gw.zip && rm clientportal.gw.zip && \
+    mkdir -p logs && \
+    mkdir -p root/cache && \
+    chmod -R 777 logs && \
+    chmod -R 777 root/cache
 
 # Copy application files
-COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-COPY app.py mock_api.py start.sh ./
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY app.py mock_api.py start.sh db_config.py ./
 COPY conf.yaml gateway/conf.yaml
 COPY static/ static/
 COPY templates/ templates/

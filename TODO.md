@@ -17,6 +17,7 @@
 - [x] Mock API IBKR:n datalle
 - [x] Perus UI Tailwind CSS:llä
 - [x] Siirrä layout.html käyttöön
+- [x] Lisää CUSIP ja ISIN -tiedot mock-dataan
 - [ ] Lisää mikro-animaatiot ja modernisoi UI
 - [ ] Lisää responsiivisuus ja mobiilioptimointi
 - [ ] Lisää latausanimaatiot
@@ -37,13 +38,14 @@
   - [ ] Yrityksen tiedot
   - [ ] Taloudelliset tunnusluvut
   - [ ] Osinkohistoria
-  - [ ] CUSIP/ISIN tiedot
+  - [x] CUSIP/ISIN tiedot
   - [ ] Analyyttikoiden suositukset
   - [ ] Uutiset ja tapahtumat
   - [ ] Osinkotappioiden analyysi
 
 ## 3. Osinkosivu
 - [x] Siirrä osinkosivu erilliseksi /dividends
+- [x] Lisää CUSIP ja ISIN -tiedot osinkotaulukkoon
 - [ ] Lisää osinkotulojen yhteenveto:
   - [ ] Kuukausittain (perusvaluutta ja EUR)
   - [ ] Vuosittain
@@ -66,7 +68,7 @@
 
 ## 4. Tietokanta ja Datanhallinta (DuckDB)
 - [ ] Tietokantakaavio:
-  - [ ] Osakkeet
+  - [ ] Osakkeet (sis. CUSIP/ISIN)
   - [ ] Positionit
   - [ ] Osingot
   - [ ] Transaktiot
@@ -94,7 +96,9 @@
   - [ ] Datan vienti ja varmuuskopiointi
 
 ## 5. API ja Integraatiot
+- [x] REST API perusrakenne
 - [ ] REST API:
+  - [x] OpenAPI/Swagger dokumentaatio perusrakenne
   - [ ] OpenAPI/Swagger dokumentaatio:
     - [ ] Suojaa /docs ja /redoc endpointit
     - [ ] Konfiguroi dokumentaatio ympäristökohtaisesti:
@@ -170,12 +174,12 @@
   - [ ] API client kirjastot:
     - [ ] Python
     - [ ] JavaScript/TypeScript
-    - [ ] Java
+    - [ ] Elixir
     - [ ] .NET
   - [ ] Frontend-esimerkit:
+    - [ ] Elixir Phoenix LivevView
     - [ ] React
     - [ ] Vue
-    - [ ] Angular
     - [ ] Svelte
     - [ ] Flet (Python)
 
@@ -213,6 +217,8 @@
   - [ ] Responsiivisuus
 
 ## 7. Testaus ja Dokumentaatio
+- [x] Perus dokumentaatio (README.md, CONTRIBUTING.md)
+- [x] GitHub Actions workflowt
 - [ ] Yksikkötestit:
   - [ ] API-tasot
   - [ ] Tietokantaoperaatiot
@@ -253,6 +259,7 @@
   - [ ] Asset optimointi
 
 ## 9. Tietoturva
+- [x] GitHub repository privaattina
 - [ ] Autentikaatio:
   - [ ] JWT
   - [ ] Session hallinta
@@ -276,13 +283,18 @@
   - [ ] API avainten hallinta
 
 ## 10. DevOps
+- [x] GitHub Actions workflowt:
+  - [x] CI
+  - [x] Docker
+  - [x] Security
+  - [x] Documentation
 - [ ] CI/CD:
   - [ ] GitHub Actions:
-    - [ ] Automaattinen testaus
-    - [ ] Automaattinen deploy
-    - [ ] Koodin laadun tarkistus
-    - [ ] Tietoturvatarkistukset
-    - [ ] Dokumentaation generointi
+    - [x] Automaattinen testaus
+    - [x] Automaattinen deploy
+    - [x] Koodin laadun tarkistus
+    - [x] Tietoturvatarkistukset
+    - [x] Dokumentaation generointi
   - [ ] GitHub Integraatio:
     - [ ] Issue tracking
     - [ ] Project boards
@@ -294,8 +306,15 @@
     - [ ] Changelog generointi
     - [ ] Release notes
   - [ ] Kehitysympäristön optimointi:
-    - [ ] Docker Compose kehitysympäristö
-    - [ ] Hot reload
+    - [ ] Docker Compose kehitysympäristö:
+      - [ ] Optimoi Dockerfile (multi-stage build)
+      - [ ] Lisää hot-reload kehitysympäristöön
+      - [ ] Konfiguroi DuckDB välimuisti
+      - [ ] Lisää health checks
+    - [ ] Caddy Server proxy:
+      - [ ] Automaattinen SSL/TLS
+      - [ ] Reverse proxy
+      - [ ] Basic auth kehitysympäristöön
     - [ ] Debug konfiguraatio
     - [ ] VS Code settings
 - [ ] Monitorointi:
@@ -326,30 +345,31 @@
   - [ ] Sisällönmarkkinointi
 
 ## 12. GitHub ja Versionhallinta
-- [ ] Repository asetukset:
+- [x] Repository asetukset:
+  - [x] Private repository
   - [ ] Branch protection rules
   - [ ] Required reviews
   - [ ] Status checks
   - [ ] Branch naming conventions
-- [ ] Workflow automatisointi:
-  - [ ] Automaattinen testaus PR:ille
-  - [ ] Automaattinen deploy stagingiin
-  - [ ] Automaattinen deploy tuotantoon
-  - [ ] Automaattinen dokumentaation päivitys
-- [ ] Issue ja PR template:
-  - [ ] Bug report template
-  - [ ] Feature request template
-  - [ ] PR template
-  - [ ] Release template
-- [ ] Dokumentaatio:
-  - [ ] README.md päivitys
-  - [ ] CONTRIBUTING.md
+- [x] Workflow automatisointi:
+  - [x] Automaattinen testaus PR:ille
+  - [x] Automaattinen deploy stagingiin
+  - [x] Automaattinen deploy tuotantoon
+  - [x] Automaattinen dokumentaation päivitys
+- [x] Issue ja PR template:
+  - [x] Bug report template
+  - [x] Feature request template
+  - [x] PR template
+  - [x] Release template
+- [x] Dokumentaatio:
+  - [x] README.md päivitys
+  - [x] CONTRIBUTING.md
   - [ ] CHANGELOG.md
   - [ ] API dokumentaatio
-- [ ] Security:
-  - [ ] Dependabot
-  - [ ] Code scanning
-  - [ ] Secret scanning
+- [x] Security:
+  - [x] Dependabot
+  - [x] Code scanning
+  - [x] Secret scanning
   - [ ] Security policy
 
 ## Kysymykset tarkennettavaksi:
@@ -364,4 +384,35 @@
 9. Tarvitsetko reaaliaikaista uutisvirtaa? -> Kyllä, markkinauutiset
 10. Haluatko käyttää WebSocket-yhteyttä reaaliaikaisten päivitysten välittämiseen? -> Pohdittava
 11. Flet vs HTML-pohjainen mobiilioptimointi? -> HTML-pohjainen ensin
-12. Monetiisointistrategia? -> Premium-taso, API-taso, lisäpalvelut 
+12. Monetiisointistrategia? -> Premium-taso, API-taso, lisäpalvelut
+
+## Development Plan
+
+## Development Environment Optimization
+- [x] Simplify Docker setup by removing Caddy
+- [x] Configure DuckDB for development
+- [x] Add hot-reload support
+- [ ] Add development-specific logging
+- [ ] Configure development-specific environment variables
+- [ ] Add development tools (debugger, profiler)
+
+## Database Management
+- [x] Set up DuckDB with proper configuration
+- [x] Configure cache size and memory mapping
+- [ ] Implement database migrations
+- [ ] Add database backup functionality
+- [ ] Optimize query performance
+
+## Testing and Quality Assurance
+- [ ] Add unit tests for database operations
+- [ ] Add integration tests for API endpoints
+- [ ] Set up continuous integration
+- [ ] Add code coverage reporting
+- [ ] Implement automated testing
+
+## Documentation
+- [x] Update Docker documentation
+- [ ] Add API documentation
+- [ ] Add development setup guide
+- [ ] Document database schema
+- [ ] Add troubleshooting guide 

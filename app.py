@@ -6,8 +6,10 @@ from decimal import Decimal
 from functools import lru_cache
 from typing import Dict, List, Optional
 
+import duckdb
 import requests
 import urllib3
+import uvicorn
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -16,7 +18,9 @@ from requests.adapters import HTTPAdapter
 from urllib3.exceptions import InsecureRequestWarning
 from urllib3.util.retry import Retry
 
-# Import mock data
+from db_config import get_db
+
+# Import local modules
 from mock_api import get_mock_response
 
 # Disable SSL warnings for local development
@@ -244,3 +248,33 @@ async def stock_details(request: Request, symbol: str):
         )
     except HTTPException as e:
         return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
+
+
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    try:
+        # Tarkista DuckDB yhteys
+        conn = get_db()
+        conn.execute("SELECT 1")
+        conn.close()
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "status": "healthy",
+                "timestamp": datetime.utcnow().isoformat(),
+                "version": "1.0.0",
+                "environment": os.getenv("ENVIRONMENT", "development"),
+            },
+        )
+    except Exception as e:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "unhealthy",
+                "error": str(e),
+                "timestamp": datetime.utcnow().isoformat(),
+                "environment": os.getenv("ENVIRONMENT", "development"),
+            },
+        )

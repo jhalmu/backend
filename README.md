@@ -1,129 +1,71 @@
-# IBKR Portfolio Backend
+# IBKR Portfolio
 
-Backend-sovellus Interactive Brokers (IBKR) portfolion hallintaan ja analysointiin. Sovellus tarjoaa API:n portfolion tietojen hakemiseen, osinkojen seurantaan ja osaketietojen analysointiin.
+A web application for managing and analyzing Interactive Brokers portfolios.
 
-## Ominaisuudet
+## Features
 
-- Portfolio-analyysi ja -seuranta
-- Osinkojen seuranta ja ennusteet
-- Osaketietojen analyysi
-- REST API rajapinta
-- Docker-tuki
-- Mock API kehitystä varten
+- Portfolio overview and analysis
+- Stock details and historical data
+- Dividend tracking and analysis
+- Real-time market data (when connected to IBKR)
+- Mock data support for development
 
-## Teknologiat
+## Development Setup
 
-- Python 3.11
-- FastAPI
-- Jinja2
-- Tailwind CSS
+### Prerequisites
+
 - Docker
-- DuckDB (suunnitteilla)
+- Docker Compose
+- Python 3.11+
 
-## Asennus
+### Quick Start
 
-### Vaatimukset
-
-- Python 3.11 tai uudempi
-- Docker ja Docker Compose
-- Git
-
-### Kehitysympäristö
-
-1. Kloonaa repository:
+1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ibkr-portfolio-backend.git
-cd ibkr-portfolio-backend
+git clone <repository-url>
+cd backend
 ```
 
-2. Luo virtuaaliympäristö ja asenna riippuvuudet:
+2. Start the development environment:
 ```bash
-python -m venv .venv
-source .venv/bin/activate  # Unix/macOS
-# tai
-.venv\Scripts\activate  # Windows
-pip install -r requirements.txt
+docker-compose up --build
 ```
 
-3. Käynnistä sovellus:
-```bash
-uvicorn app:app --reload
-```
+3. Access the application:
+- Web interface: http://localhost:5055
+- API documentation: http://localhost:5055/docs
 
-### Docker
+### Development Mode
 
-1. Rakenna ja käynnistä Docker-kontti:
-```bash
-docker compose up --build
-```
+The application runs in development mode by default with:
+- Hot-reload for Python files
+- DuckDB database with 1GB cache
+- Mock API support
 
-Sovellus on saatavilla osoitteessa http://localhost:8000
+### Environment Variables
 
-## API Dokumentaatio
+- `ENVIRONMENT`: Set to "development" for hot-reload
+- `DUCKDB_PATH`: Path to DuckDB database
+- `DUCKDB_CACHE_SIZE`: Cache size for DuckDB
 
-API dokumentaatio on saatavilla osoitteessa:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## Kehitys
-
-### Projektin rakenne
+## Project Structure
 
 ```
 backend/
-├── app.py              # Pääsovellus
-├── mock_api.py         # Mock API kehitystä varten
-├── requirements.txt    # Python riippuvuudet
-├── Dockerfile         # Docker konfiguraatio
-├── docker-compose.yml # Docker Compose konfiguraatio
-├── conf.yaml          # IBKR Gateway konfiguraatio
-├── start.sh           # Käynnistysskripti
-├── static/            # Staattiset tiedostot
-└── templates/         # Jinja2 templatet
+├── app.py              # Main FastAPI application
+├── mock_api.py         # Mock API implementation
+├── db_config.py        # Database configuration
+├── start.sh           # Startup script
+├── conf.yaml          # IBKR Gateway configuration
+├── data/              # Data directory
+├── static/            # Static files
+└── templates/         # HTML templates
 ```
 
-### Kehitysympäristön asetukset
+## Contributing
 
-1. VS Code asetukset:
-   - Python extension
-   - Docker extension
-   - Remote Development extension
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-2. Hot reload:
-   - Sovellus käynnistyy automaattisesti muutosten yhteydessä
-   - Docker Compose käyttää volyymimounttausta kehitystä varten
+## License
 
-### Testaus
-
-```bash
-# Yksikkötestit
-pytest
-
-# API testit
-pytest tests/api/
-
-# Kattavuusraportti
-pytest --cov=app tests/
-```
-
-## Tuotantoon vienti
-
-1. Rakenna Docker-kuva:
-```bash
-docker build -t ibkr-portfolio-backend .
-```
-
-2. Vie kuva rekisteriin:
-```bash
-docker tag ibkr-portfolio-backend your-registry.com/ibkr-portfolio-backend:latest
-docker push your-registry.com/ibkr-portfolio-backend:latest
-```
-
-## Lisenssi
-
-MIT
-
-## Yhteystiedot
-
-- GitHub: [yourusername](https://github.com/yourusername)
-- Email: your.email@example.com 
+This project is licensed under the MIT License - see the LICENSE file for details. 

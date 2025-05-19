@@ -1,27 +1,22 @@
-version: '3.8'
-
 services:
-  web:
+  app:
     build: .
-    container_name: ibkr
-    environment:
-      USE_MOCK: "true"  # Mock-tila päällä
-      IBKR_ACCOUNT_ID: "U7299935"  # Tämä ei vaikuta mock-tilassa
+    volumes:
+      - .:/app
+      - ./data:/app/data
     ports:
       - "5055:5055"
       - "5056:5056"
-    volumes:
-      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DUCKDB_PATH=/app/data/portfolio.db
+      - DUCKDB_CACHE_SIZE=1GB
+      - ENVIRONMENT=development
     healthcheck:
-      test: ["CMD", "curl", "-k", "-f", "https://localhost:5055/v1/api/one/user/status"]
+      test: ["CMD", "curl", "-f", "http://localhost:5055/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     restart: unless-stopped
-    networks:
-      - ibkr-network
-
-networks:
-  ibkr-network:
-    driver: bridge
+    user: "${UID:-1000}:${GID:-1000}"

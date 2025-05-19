@@ -1,12 +1,12 @@
 # IBKR Portfolio
 
-A web application for managing and analyzing Interactive Brokers portfolios.
+Web-sovellus Interactive Brokers (IBKR) portfolion hallintaan ja analysointiin.
 
 ## Features
 
 - Portfolio overview and analysis
 - Stock details and historical data
-- Dividend tracking and analysis
+- Dividend tracking
 - Real-time market data (when connected to IBKR)
 - Mock data support for development
 
@@ -14,50 +14,62 @@ A web application for managing and analyzing Interactive Brokers portfolios.
 
 ### Prerequisites
 
-- Docker
-- Docker Compose
+- Docker and Docker Compose
 - Python 3.11+
+- IBKR Account (for production use)
 
 ### Quick Start
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd backend
+git clone https://github.com/yourusername/ibkr-portfolio-backend.git
+cd ibkr-portfolio-backend
 ```
 
-2. Start the development environment:
+2. Create `.env` file:
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Edit .env with your settings
+# Required variables:
+# - IBKR_ACCOUNT_ID: Your IBKR account ID
+# - ENVIRONMENT: development/production
+# - DUCKDB_PATH: Path to DuckDB database file
+# - DUCKDB_CACHE_SIZE: Cache size for DuckDB
+```
+
+3. Start the development environment:
 ```bash
 docker-compose up --build
 ```
 
-3. Access the application:
-- Web interface: http://localhost:5055
+4. Access the application:
+- Main application: http://localhost:5055
 - API documentation: http://localhost:5055/docs
-
-### Development Mode
-
-The application runs in development mode by default with:
-- Hot-reload for Python files
-- DuckDB database with 1GB cache
-- Mock API support
 
 ### Environment Variables
 
-- `ENVIRONMENT`: Set to "development" for hot-reload
-- `DUCKDB_PATH`: Path to DuckDB database
-- `DUCKDB_CACHE_SIZE`: Cache size for DuckDB
+The application uses the following environment variables (configured in `.env`):
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| IBKR_ACCOUNT_ID | Your IBKR account ID | - |
+| ENVIRONMENT | development/production | development |
+| DUCKDB_PATH | Path to DuckDB database | data/portfolio.duckdb |
+| DUCKDB_CACHE_SIZE | DuckDB cache size | 1GB |
 
 ## Project Structure
 
 ```
-backend/
-├── app.py              # Main FastAPI application
-├── mock_api.py         # Mock API implementation
+.
+├── app.py              # Main application
+├── mock_api.py         # Mock data for development
 ├── db_config.py        # Database configuration
-├── start.sh           # Startup script
-├── conf.yaml          # IBKR Gateway configuration
-├── data/              # Data directory
+├── conf.yaml           # IBKR Gateway configuration
+├── docker-compose.yml  # Docker Compose configuration
+├── Dockerfile         # Docker configuration
+├── requirements.txt    # Python dependencies
 ├── static/            # Static files
 └── templates/         # HTML templates
 ```

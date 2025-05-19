@@ -1,0 +1,96 @@
+site_name: IBKR Portfolio Backend
+site_description: Backend-sovellus Interactive Brokers (IBKR) portfolion hallintaan ja analysointiin
+site_author: Your Name
+repo_url: https://github.com/yourusername/ibkr-portfolio-backend
+repo_name: yourusername/ibkr-portfolio-backend
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - pymdownx.emoji
+  - pymdownx.tasklist
+  - admonition
+  - footnotes
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          selection:
+            docstring_style: google
+          rendering:
+            show_source: true
+            show_root_heading: true
+            show_category_heading: true
+            show_if_no_docstring: true
+            show_signature_annotations: true
+            show_signature_return_annotations: true
+            show_bases: true
+            show_submodules: true
+            heading_level: 2
+            merge_init_into_class: true
+            show_signature: true
+            show_signature_return: true
+            show_signature_return_type: true
+            show_signature_return_annotation: true
+            show_signature_return_type_annotation: true
+            show_signature_return_type_annotation_type: true
+            show_signature_return_type_annotation_type_type: true
+            show_signature_return_type_annotation_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+            show_signature_return_type_annotation_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type_type: true
+ 

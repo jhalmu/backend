@@ -18,6 +18,8 @@ Web-sovellus Interactive Brokers (IBKR) portfolion hallintaan ja analysointiin.
 - Varmista, että ENVIRONMENT on production tuotantokäytössä.
 - Suojaa palvelin palomuurilla ja käytä HTTPS:ää tuotannossa.
 - Katso myös SECURITY.md (tulossa) ja .github/workflows/security.yml.
+- The project relies on GitHub Dependabot for security updates and vulnerability checks.
+- The Safety tool will be used for security checks once it is updated to be compatible with the latest pydantic version.
 
 ## Development Setup
 

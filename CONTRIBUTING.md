@@ -114,4 +114,15 @@ Jos sinulla on kysymyksiä tai ehdotuksia, ota yhteyttä:
 
 ## Lisenssi
 
-Tämä projekti on lisensoitu MIT-lisenssillä. Katso [LICENSE](LICENSE) tiedosto lisätietoja varten. 
+Tämä projekti on lisensoitu MIT-lisenssillä. Katso [LICENSE](LICENSE) tiedosto lisätietoja varten.
+
+## Security & Environment
+
+- Älä koskaan jaa .env-tiedostoa tai IBKR_ACCOUNT_ID:tä julkisesti.
+- Kaikki salaisuudet ja tunnukset tulee säilyttää .env-tiedostossa, joka on .gitignore:ssa.
+- Kehitysympäristössä käytetään mock-dataa (USE_MOCK=true), tuotannossa oikeaa IBKR-yhteyttä (USE_MOCK=false).
+- Varmista, että ENVIRONMENT on production tuotantokäytössä.
+- Suojaa palvelin palomuurilla ja käytä HTTPS:ää tuotannossa.
+- Katso myös SECURITY.md (tulossa) ja .github/workflows/security.yml.
+- The project relies on GitHub Dependabot for security updates and vulnerability checks.
+- The Safety tool will be used for security checks once it is updated to be compatible with the latest pydantic version. 

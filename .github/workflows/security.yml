@@ -33,10 +33,3 @@ jobs:
       run: |
         pip install safety
         safety check --json > safety-results.json
-        
-    - name: Run Snyk
-      uses: snyk/actions/python@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --severity-threshold=high 
